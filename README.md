@@ -1,11 +1,17 @@
-# RepeatFE
-> 重学前端
+# 重学前端
 
 - [JavaScript系列合集](./JavaScript.md)
 - [Html系列合集](./Html.md)
 - [Css系列合集](./Css.md)
 - [Vue系列合集](./Vue.md)
 - [React系列合集](./React.md)
+- [NodeJs系列合集](./NodeJs.md)
 - [TypeScript系列合集](./TypeScript.md)
 - [HTTP系列合集](./HTTP.md)
 - [浏览器系列合集](./Browser.md)
+- [前端模块化](./Modules.md)
+- [前端工程化](./Engineering.md)
+- [组件库建设](./ComponentLibrary.md)
+- [操作系统](./OperatingSystem.md)
+- [数据库](./Database.md)
+- [Python](./Python.md)
