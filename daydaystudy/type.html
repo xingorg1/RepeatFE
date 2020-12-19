@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类型检测</title>
+  </head>
+  <body>
+    <script>
+      // Object.prototype.toString = function () {
+      //   console.log(this);
+      // };
+      const arr1 = [];
+      Object.prototype.toString(arr1); // 打印(即this指向) Object.prototype
+      Object.prototype.toString.call(arr1); // 打印(即this指向) arr1
+    </script>
+    <script>
+      function Person() {}
+      console.log(Object.prototype.toString.call(2020)); // [object Number]
+      console.log(Object.prototype.toString.call("小石头")); // [object String]
+      console.log(Object.prototype.toString.call(true)); // [object Boolean]
+      console.log(Object.prototype.toString.call(undefined)); // [object Undefined]
+      console.log(Object.prototype.toString.call(null)); // [object Null]
+      console.log(Object.prototype.toString.call(Symbol("唯一的石头姐"))); // [object Symbol]
+      console.log(Object.prototype.toString.call(999n)); // [object BigInt]
+      console.log(Object.prototype.toString.call({})); // [object Object]
+      console.log(Object.prototype.toString.call(() => "xing.org1^")); // [object Function]
+      // 内置对象可以细分
+      console.log(Object.prototype.toString.call([])); // [object Array]
+      console.log(Object.prototype.toString.call(/^\d{1,4}$/g)); // [object RegExp]
+      console.log(Object.prototype.toString.call(new Date())); // [object Date]
+      // 自定义对象不能细分类型
+      console.log(Object.prototype.toString.call(new Person())); // [object Object]
+    </script>
+    <script>
+      console.log("====constructor====");
+      function Xingorg1() {}
+      var xingorg1 = new Xingorg1();
+      console.log(xingorg1.constructor.name); // Xingorg1
+
+      function Person() {}
+      console.log((2020).constructor.name); // Number
+      console.log("小石头".constructor.name); // String
+      console.log(true.constructor.name); // Boolean
+      // console.log((undefined).constructor.name)  // 报错 TypeError: Cannot read property 'constructor' of undefined
+      // console.log((null).constructor.name)  // 报错 TypeError: Cannot read property 'constructor' of undefined
+      console.log(Symbol("唯一的石头姐").constructor.name); // Symbol
+      console.log(999n.constructor.name); // BigInt
+      console.log({}.constructor.name); // Object
+      console.log(Person.constructor.name); // Function
+      // 内置对象可以细分
+      console.log([].constructor.name); // Array
+      console.log(/^\d{1,4}$/g.constructor.name); // RegExp
+      console.log(new Date().constructor.name); // Date
+      // 自定义对象可以细分
+      console.log(new Person().constructor.name); // Person
+
+      function getConstructor(target) {
+        if (target == undefined) return target;
+        // 利用“双等”时，undefined和null一致
+        else return target.constructor.name;
+      }
+    </script>
+    <script>
+      console.log("===typeof===");
+      function Person() {}
+      console.log(typeof 2020); // number
+      console.log(typeof "小石头"); // string
+      console.log(typeof true); // boolean
+      console.log(typeof undefined); // undefined
+      console.log(typeof null); // object
+      console.log(typeof Symbol("唯一的石头姐")); // symbol
+      console.log(typeof 999n); // bigint
+      console.log(typeof {}); // object
+      console.log(typeof Person); // funtion
+      // 内置对象不可以细分
+      console.log(typeof []); // object
+      console.log(typeof /^\d{1,4}$/g); // object
+      console.log(typeof new Date()); // object
+      // 自定义对象不可以细分
+      console.log(typeof new Person()); // object
+    </script>
+    <script>
+      console.log("===classof===");
+      // 封装类型
+      function classof(o) {
+        if (o === null) return "null";
+        if (typeof o !== "object") return typeof o;
+        else
+          return Object.prototype.toString
+            .call(o)
+            .slice(8, -1)
+            .toLocaleLowerCase();
+      }
+      const { log } = console;
+      log(classof(2020)); // number
+      log(classof("石头加油")); // string
+      log(classof(true)); // boolean
+      log(classof(undefined)); // undefined
+      log(classof(null)); // null
+      log(classof(Symbol("没毛病！"))); // symbol
+      log(classof(1n)); // bigint
+      log(classof({})); // object
+      log(classof(classof)); // function
+      log(classof([])); // array
+      log(classof(new Date())); // date
+      // 还是没法细分类型
+      log(classof(new classof())); // object
+    </script>
+  </body>
+</html>
